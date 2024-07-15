@@ -1,0 +1,30 @@
+安装第三方依赖
+1.这是个model report项目，可以方不同层级的packet的nodejs的项目
+2.因为是model report项目，所以要用yarn这个包管理工具
+在控制台全局安装一下yarn ： npm install  yarn -g  (要先安装nodejs)
+提示 added 1 packages in 2s 之后应该就是错过了
+
+安装了yarn 之后可以直接执行yarn
+
+
+vscode集成终端中执行yarn start命令时报错：
+yarn : 无法加载文件 C:\Users\TCJ\AppData\Roaming\npm\yarn.ps1，因为在此系统上禁止运行脚本。
+解决办法：
+1.搜索powershell，以管理员身份运行;
+2.执行set-ExecutionPolicy RemoteSigned，回车，输入y，再回车;
+3.执行：get-ExecutionPolicy;
+运行成功就可以在vscode执行yarn 命令了
+
+server文件：
+1.服务端文件夹，用来写服务端的代码
+common文件夹
+utils文件夹：
+快捷方式的同步，因为客户端与服务端一些代码相同，所以写了快捷方式用来同步，可以把common文件夹同步到client客户端文件夹下 
+输入yarn dev就会执行同步脚本，脚本在server文件夹的package.json中，通过脚本会执行server的index.ts的入口文件，执行快捷方式函数。
+同步完之后客户端会多个commom文件夹，这个文件夹就是同步过来的。
+
+客户端：
+base基础类
+common是从服务器文件中同步的
+global放全局的脚本，例如DataManager 和EventManager
+utils文件夹：工具函数
