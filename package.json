@@ -2,11 +2,15 @@
   "name": "game",
   "repository": "https://gitee.com/sli97/cocos-nodejs-io-game.git",
   "private": true,
-  "version": "1.0.0",
+  "version": "3.6.0",
   "workspaces": [
     "apps/*"
   ],
   "scripts": {
     "dev": "yarn workspace @game/server run dev"
-  }
+  },
+  "creator": {
+    "version": "3.6.0"
+  },
+  "uuid": "6640e34d-bc38-4b00-b36a-bf7f2542aa1f"
 }
