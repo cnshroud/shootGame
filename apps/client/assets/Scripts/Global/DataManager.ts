@@ -1,5 +1,7 @@
+import { Prefab } from "cc";
 import Singleton from "../Base/Singleton";
-import { IActorMove, IState } from "../Common";
+import { EntityTypeEnum, IActorMove, IState } from "../Common";
+import { ActorManager } from "../Entity/Actor/ActorManager";
 import { joyStickManager } from "../UI/joyStickManager";
 //这是个常量速度
 const ACTOR_SPEED = 100
@@ -10,13 +12,16 @@ export default class DataManager extends Singleton {
   }
 
   jm: joyStickManager
-
+  //actormanager的映射，键是number类型，值是脚本，prefabMap同理
+  actorMap: Map<number, ActorManager> = new Map()
+  prefabMap: Map<string, Prefab> = new Map()
 
   //IState是前后端通用的类型，所以写在common文件夹下
   state: IState = {
     //角色数组，因为之后会创建很多角色
     actors: [{
       id: 1,
+      type: EntityTypeEnum.Actor1,
       position: {
         x: 0,
         y: 0

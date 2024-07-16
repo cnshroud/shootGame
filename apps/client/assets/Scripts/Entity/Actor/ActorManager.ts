@@ -1,6 +1,6 @@
 import { _decorator, Component, EventTouch, Input, input, UITransform, Vec2, Node, log } from 'cc';
 import DataManager from '../../Global/DataManager';
-import { InputTypeEnum } from '../../Common';
+import { IActor, InputTypeEnum } from '../../Common';
 const { ccclass, property } = _decorator;
 
 
@@ -9,6 +9,10 @@ const { ccclass, property } = _decorator;
 export class ActorManager extends Component {
 
     onLoad() {
+
+    }
+
+    init(data: IActor) {
 
     }
     update(dt) {
@@ -30,7 +34,9 @@ export class ActorManager extends Component {
             console.log(DataManager.Instance.state.actors[0].position.x, DataManager.Instance.state.actors[0].position.y);
         }
     }
-
+    render(data: IActor) {
+        this.node.setPosition(data.position.x, data.position.y);
+    }
 
 
 }

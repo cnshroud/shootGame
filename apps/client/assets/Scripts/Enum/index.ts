@@ -9,4 +9,10 @@ export enum ParamsNameEnum {
   Attack = "Attack",
 }
 
-export enum EventEnum {}
+export enum EventEnum { }
+
+//最好把路径什么都写成枚举
+export enum PrefabPathEnum {
+  Actor1 = "Prefab/Actor",
+  Map = "Prefab/Map"
+}
