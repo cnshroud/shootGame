@@ -60,7 +60,7 @@ export class joyStickManager extends Component {
 
         //归一化，normalize()方法用于将向量归一化，使其长度为1。
         this.input = stickPos.clone().normalize()
-        log(this.input)
+        // log(this.input)
     }
 }
 

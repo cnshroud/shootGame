@@ -1,0 +1,60 @@
+安装第三方依赖
+1.这是个model report项目，可以方不同层级的packet的nodejs的项目
+2.因为是model report项目，所以要用yarn这个包管理工具
+在控制台全局安装一下yarn ： npm install  yarn -g  (要先安装nodejs)
+提示 added 1 packages in 2s 之后应该就是错过了
+
+安装了yarn 之后可以直接执行yarn
+
+
+vscode集成终端中执行yarn start命令时报错：
+yarn : 无法加载文件 C:\Users\TCJ\AppData\Roaming\npm\yarn.ps1，因为在此系统上禁止运行脚本。
+解决办法：
+1.搜索powershell，以管理员身份运行;
+2.执行set-ExecutionPolicy RemoteSigned，回车，输入y，再回车;
+3.执行：get-ExecutionPolicy;
+运行成功就可以在vscode执行yarn 命令了
+
+server文件：
+1.服务端文件夹，用来写服务端的代码
+common文件夹
+utils文件夹：
+快捷方式的同步，因为客户端与服务端一些代码相同，所以写了快捷方式用来同步，可以把common文件夹同步到client客户端文件夹下 
+输入yarn dev就会执行同步脚本，脚本在server文件夹的package.json中，通过脚本会执行server的index.ts的入口文件，执行快捷方式函数。
+同步完之后客户端会多个commom文件夹，这个文件夹就是同步过来的。
+
+客户端：
+base基础类
+common是从服务器文件中同步的
+global放全局的脚本，例如DataManager 和EventManager
+utils文件夹：工具函数
+
+
+
+
+状态同步与帧同步的区别
+状态同步：
+客户端触发渲染后提交给服务器，由服务器来计算数据，并且所有的数据都是由服务器来计算的，客户端只展示效果
+帧同步：
+客户端把操作发给服务器，服务器打包（摇了摇杆，点了技能按钮等操作）转发为数据帧交给客户端计算，服务器只负责数据收集和转发，所有操作和渲染都是客户端来做的。
+帧同步需要考虑如何让每个客户端的计算都保存一致，和从服务器转发到每个客户端的时间如何保持一致
+
+
+
+
+
+
+
+
+
+角色移动：数据篇
+1.首先在datamanager 实现一个state字段，这个字段代表场景上的所有实体的状态，比如角色，子弹等 ，并且实现applyinput方法，这个方法可以通过收到的input修改state
+2.ActorManager会监听joyStick摇杆的输入然后封装成一个个input，提供给applyinput
+3.BattleManager会从dataManager中拿数据，然后驱动ActorManager来渲染视图
+为什么要用这套逻辑呢？
+    因为是网络游戏所以每一个操作都要封装成input给服务端，因为现在还没写服务端，所以假装datamanager来接受input
+为什么需要BattleManager
+    因为帧同步游戏是非常依赖input来修改和渲染视图和数据的，如果在ActorManager的update方法中直接执行数据的逻辑跟新和渲染，
+    就不能保障每一帧的数据和每个客户端的游戏画面都是一模一样的，所以需要BattleManager来驱动ActorManager来渲染视图。
+4.common文件夹中用于存放客户端与服务端通用的类型
+5.common文件夹的index文件的export操作是为了引入当前目录下的所有类
