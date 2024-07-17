@@ -15,7 +15,7 @@ export class ActorManager extends Component {
     init(data: IActor) {
 
     }
-    update(dt) {
+    tick(dt) {
         //判断玩家是否在操作摇杆
         if (DataManager.Instance.jm.input.length()) {
             const { x, y } = DataManager.Instance.jm.input;
@@ -35,7 +35,14 @@ export class ActorManager extends Component {
         }
     }
     render(data: IActor) {
-        this.node.setPosition(data.position.x, data.position.y);
+        //从data中解构出方向和位置
+        const { direction, position } = data;
+        this.node.setPosition(position.x, position.y);
+
+        //根据方向让角色左右翻转
+        if (direction.x !== 0) {
+            this.node.setScale(direction.x > 0 ? 1 : -1, 1, 1);
+        }
     }
 
 

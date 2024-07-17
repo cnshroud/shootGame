@@ -30,6 +30,10 @@ export class joyStickManager extends Component {
 
     onDestroy() {
         input.off(Input.EventType.TOUCH_START, this.onTouchStart, this);
+        //解绑
+        input.off(Input.EventType.TOUCH_START, this.onTouchStart, this);
+        input.off(Input.EventType.TOUCH_END, this.onTouchEnd, this);
+        input.off(Input.EventType.TOUCH_MOVE, this.onTouchMove, this);
     }
     //点击屏幕时body出现在点击的位置
     onTouchStart(event: EventTouch) {

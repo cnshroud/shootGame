@@ -16,3 +16,9 @@ export enum PrefabPathEnum {
   Actor1 = "Prefab/Actor",
   Map = "Prefab/Map"
 }
+
+export enum EntityStateEnum {
+  Idle = "Idle",
+  Run = "Run",
+  Attack = "Attack",
+}

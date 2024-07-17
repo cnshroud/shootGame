@@ -20,12 +20,26 @@ export class BattleManager extends Component {
         this.stage.destroyAllChildren()
         DataManager.Instance.jm = this.ui.getComponentInChildren(joyStickManager);
     }
-    update() {
+    update(dt) {
         if (!this.shouldUpdate) {
             return
         }
         this.render()
+        this.tick(dt)
     }
+    tick(dt) {
+        this.tickActor(dt)
+    }
+    tickActor(dt) {
+        for (const data of DataManager.Instance.state.actors) {
+            const { id, type } = data
+            //获取角色数组里的角色id
+            let am = DataManager.Instance.actorMap.get(id)
+            am.tick(dt)
+
+        }
+    }
+
     async start() {
         await this.loadRes()
         this.initMap()
@@ -47,6 +61,7 @@ export class BattleManager extends Component {
     render() {
         //调用角色渲染
         this.renderActor()
+
     }
 
     async renderActor() {
